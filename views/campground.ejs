@@ -1,0 +1,67 @@
+<% layout('layout/boilerplate.ejs') %>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="<%= camp.image %>" class="img-fluid rounded-start" alt="campground image">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= camp.name %></h5>
+        <p class="card-text"><%= camp.description %></p>
+        <p class="card-text"><%= camp.price %></p>
+        <p class="card-text"><small class="text-muted"><%= camp.location %></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reviews">
+  <%for(let review of camp.reviews){%>
+    <p>Rating:<%= review.rating %></p>
+    <p> Review:<%= review.body %></p>
+    <form action="/campgrounds/<%= camp._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete review</button>
+    </form>
+    <hr>
+  <%}%>
+</div>
+
+<form action="/campgrounds/edit/<%=camp._id%>">
+  <button type="submit">Update</button>
+</form>
+<form action="/campgrounds?id=<%=camp._id%>&_method=DELETE" method="POST">
+  <button type="submit">Delete</button>
+</form> 
+
+<form action="/campgrounds/<%= camp.id %>/reviews" method="POST" class="needs-validation" novalidate>
+  <div class="form-group">
+    <label for="review[body]"> Enter your review: </label>
+    <textarea name="review[body]" id="review[body]" rows="3" cols="8" required class="form-control"></textarea>
+  <div class="invalid-feedback">Review is required.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="review[rating]">Choose Ratings:</label>
+    <input type="range" min="1" max="5" name="review[rating]" id="review[rating]" required class="form-control">
+    <div class="invalid-feedback">Rating is required.</div>
+  </div>
+  <button class="submit">add review</button>
+</form>
+
+<script>
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated'); // <-- this line adds the validation style
+                    }, false);
+                });
+        })();
+</script>

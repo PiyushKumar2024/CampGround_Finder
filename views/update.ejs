@@ -1,0 +1,44 @@
+<% layout('layout/boilerplate.ejs') %>
+    <form action="/campgrounds/<%= data._id %>?_method=PATCH" method="POST" class="needs-validation" novalidate>
+
+        <div class="form-group">
+            <label for="name">Name of campground</label>
+            <input type="text" id="name" name="name" value="<%= data.name %>" required class="form-control">
+            <div class="invalid-feedback">Name is required.</div>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" value="<%= data.price %>" required class="form-control">
+            <div class="invalid-feedback">Price is required.</div>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" value="<%= data.location %>" required class="form-control">
+            <div class="invalid-feedback">Location is required.</div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" value="<%= data.description %>" required
+                class="form-control">
+            <div class="invalid-feedback">Description is required.</div>
+        </div>
+        <button type="submit">Update</button>
+    </form>
+
+    <script>
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated'); // <-- this line adds the validation style
+                    }, false);
+                });
+        })();
+    </script>

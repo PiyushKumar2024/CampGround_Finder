@@ -1,0 +1,19 @@
+<% layout('layout/boilerplate.ejs') %>
+<div class="container pt-5"> 
+    <div class="row gy-2">
+<% for(let camp of data){ %>
+    <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center" >
+        <div class="card border border-5 rounded-3 px-1 my-1" style="border-color:#1B56FD ;max-width:400px;">
+            <img class="card-img-top rounded-4 p-1 pt-2" src="<%= camp.image %>" alt="Camp image">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-center mt-1 mb-1 fw-bold"><%= camp.name %></h5>
+                <p class="card-text"><%= camp.description %></p>
+                <a href="/campgrounds/<%= camp._id %>" class="btn btn-primary mx-3">More Details</a>
+            </div>
+        </div>
+    </div>
+        
+        <% } %>
+    </div>
+        </div>   
+            
