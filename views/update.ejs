@@ -25,20 +25,4 @@
         <button type="submit">Update</button>
     </form>
 
-    <script>
-        (function () {
-            'use strict';
-            var forms = document.querySelectorAll('.needs-validation');
-
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated'); // <-- this line adds the validation style
-                    }, false);
-                });
-        })();
-    </script>
+    <script src="/formValidation.js"></script>
