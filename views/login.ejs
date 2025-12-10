@@ -1,0 +1,27 @@
+<% layout('layout/boilerplate.ejs') %>
+
+<form action="/login" method="POST" class="needs-validation mt-5 border p-5 border-5 rounded-3" novalidate style="border: 5px solid blue; border-radius: 1rem; padding: 3rem;"
+>
+
+        <div class="form-group">
+            <label for="username">Enter username:</label>
+            <input type="text" id="username" name="username" required class="form-control">
+            <div class="invalid-feedback">Username is required.</div>
+        </div>
+        <div class="form-group">
+            <label for="email">Enter mail:</label>
+            <input type="email" id="email" name="email" required class="form-control">
+            <div class="invalid-feedback">Email is required.</div>
+        </div>
+        <div class="form-group">
+            <label for="password">Enter password:</label>
+            <input type="password" id="password" name="password" required class="form-control">
+            <div class="invalid-feedback">Password is required.</div>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    </div>
+    </div>
+    </div>
+
+    <script src="/formValidation.js"></script>

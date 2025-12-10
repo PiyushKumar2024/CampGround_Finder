@@ -1,0 +1,20 @@
+1.authentication using passport
+    1.passport.use(new LocalStrategy(User.authenticate())); 
+
+    tell the passport to use local stratergy local to your system
+    username and password validation. and do the auth(come with passport) method on user model
+
+    2.passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
+
+    how the user will be stored and deleted from a session
+
+    3.User.register(user,pw)
+    async so use await. set a password hashed to the user obj and we can storein our db
+
+    4.app.use(passport.initialize());
+    initialize the passport to use its stratergies
+
+    5.app.use(passport.session());
+    enable session login so dont have to re login again and again
+    express.session() should be setup first

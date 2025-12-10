@@ -1,34 +1,36 @@
-const express = require('express')
-const app = express()
-const path = require('path')
-const mongoose=require('mongoose')
+const express = require('express');
+const app = express();
+const path = require('path');
+const mongoose=require('mongoose');
 
-//models
-const Campground= require('./models/campground.js')
-const Review=require('./models/review.js')
+const Campground= require('./models/campground.js');
+const Review=require('./models/review.js');
+const User=require('./models/user.js');
 
-//custom error handlers
-const catchAsync=require('./helper/catchAsync.js')
-const appError=require('./helper/error-class.js')
+const catchAsync=require('./helper/catchAsync.js');
+const appError=require('./helper/error-class.js');
 
-//method override for forms
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const ejsMate=require('ejs-mate');
+const joi=require('joi');
 
-//for ejs
-const ejsMate=require('ejs-mate')
-
-//for validation 
-const joi=require('joi')
-const campgroundsChecker=require('./models/campgroundValidity.js')
-const reviewChecker=require('./models/reviewValidity.js')
-
+const campgroundsChecker=require('./models/campgroundValidity.js');
+const reviewChecker=require('./models/reviewValidity.js');
 
 //using routes from router
-const campgrounds=require('./routes/campground.js')
-const reviews=require('./routes/reviews.js')
+const campgroundsRoutes=require('./routes/campground.js');
+const reviewsRoutes=require('./routes/reviews.js');
+const authenticationRoutes=require('./routes/user.js');
+
+
+const session=require('express-session');
+const flash=require('connect-flash');
+
+//passprt authentication
+const passport=require('passport');
+const LocalStrategy=require('passport-local');
 
 //setting up session
-const session=require('express-session')
 const configObj={
     secret:'ThisshouldBeAddedInProduction',
     resave:false,
@@ -50,7 +52,6 @@ app.get('/test-session',(req,res)=>{
 })
 
 //flash session and middlewares
-const flash=require('connect-flash')
 app.use(flash())
 app.use((req,res,next)=>{
     res.locals.success=req.flash('success')
@@ -58,7 +59,12 @@ app.use((req,res,next)=>{
     next();
 })
 
-//connecting to mongoose
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
     .then(() => {
         console.log('successfully connected with mongodb')
@@ -88,8 +94,15 @@ app.use(express.json())
 app.use(methodOverride('_method'))
 
 //setting up routes
-app.use('/campgrounds',campgrounds)
-app.use('/campgrounds/:id/reviews',reviews)
+app.use('/campgrounds',campgroundsRoutes)
+app.use('/campgrounds/:id/reviews',reviewsRoutes)
+app.use('/',authenticationRoutes)
+
+app.get('/fakeUser',async (req,res)=>{
+    const user=new User({email:'myname@maild.com',username:'Piyus'});
+    const newUser=await User.register(user,'kumarYadav');
+    res.send(newUser);
+})
 
 
 //camprground validation
