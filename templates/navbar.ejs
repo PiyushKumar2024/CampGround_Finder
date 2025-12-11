@@ -1,22 +1,27 @@
-<div class="row mb-2">
-      <div class="col">
-        <nav class="navbar sticky-top navbar-expand-md navbar-dark" style="background-color: #4B70F5;">
-
-          <a href="" class="navbar-brand text-white ps-3 fw-bold">Yelp Camp</a>
-          <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+<nav class="navbar sticky-top navbar-expand-md navbar-light bg-white shadow-sm mb-2">
+    <div class="container-fluid">
+        <a href="/" class="navbar-brand fw-bold text-secondary">
+            <i class="bi-compass me-1"></i>
+            Yelp Camp
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse me-2" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a href="/campgrounds" class="nav-link active text-white">Campgrounds</a></li>
-              <li class="nav-item"><a href="/campgrounds/new" class="nav-link active text-white">New Camp</a></li>
-              <li class="nav-item"><a href="/home" class="nav-link active text-white">Home</a></li>
-              <li class="nav-item"><a href="/register" class="nav-link active text-white">Register</a></li>
-              <li class="nav-item"><a href="/login" class="nav-link active text-white">Login</a></li>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/campgrounds" class="nav-link">Campgrounds</a></li>
+                <li class="nav-item"><a href="/campgrounds/new" class="nav-link">New Camp</a></li>
             </ul>
-          </div>
-
-        </nav>
-      </div>
+            <div class="d-flex">
+                <a href="/login" class="btn btn-outline-dark me-2">
+                    <i class="bi bi-box-arrow-in-right"></i> Login
+                </a>
+                <a href="/register" class="btn btn-success">
+                    <i class="bi bi-person-plus-fill"></i> Register
+                </a>
+            </div>
+        </div>
     </div>
+</nav>

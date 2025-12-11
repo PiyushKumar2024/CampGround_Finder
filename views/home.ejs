@@ -1,20 +1,88 @@
 <% layout('layout/boilerplate.ejs') %>
 
-<div class="container pt-5"> 
-    <div class="row gy-2">
+<style>
+    body {
+        background-color: #fff; /* A clean, bright white background */
+    }
+
+    .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+        background-size: cover;
+        height: 60vh;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-section h1, .hero-section p {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .card {
+        transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+        overflow: hidden; /* To contain the zoomed image */
+    }
+    .card:hover {
+        transform: translateY(-5px); /* Lift the card up slightly */
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; /* A softer shadow */
+    }
+
+    .card-img-container {
+        position: relative;
+    }
+
+    .card-img-top {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+
+    .card-img-overlay-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        color: white;
+        padding: 1.5rem 1rem 0.75rem;
+        font-size: 0.9rem;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+</style>
+
+<div class="hero-section">
+    <div class="py-4 col-lg-8 mx-auto">
+        <h1 class="display-4" style="font-weight: 500;">Find Your Next Escape</h1>
+        <p class="lead">
+            Welcome to YelpCamp! We've gathered a collection of the most beautiful and unique campgrounds from around the globe.
+            Whether you're looking for a scenic spot by the lake or a secluded hideaway in the forest, your next adventure starts here.
+        </p>
+    </div>
+</div>
+
+<div class="container-fluid p-4 p-md-5">
+    <div class="row gy-4">
 <% for(let camp of data){ %>
-    <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center" >
-        <div class="card border border-5 rounded-3 px-1 my-1" style="border-color:#1B56FD ;max-width:400px;">
-            <img class="card-img-top rounded-4 p-1 pt-2" src="<%= camp.image %>" alt="Camp image">
+    <div class="col-12 col-md-6 col-lg-4" >
+        <div class="card h-100 shadow border-0">
+            <div class="card-img-container">
+                <img class="card-img-top" style="aspect-ratio: 16/9; object-fit: cover;" src="<%= camp.image %>" alt="Camp image">
+                <div class="card-img-overlay-bottom">
+                    <i class="bi-geo-alt"></i> <%= camp.location %>
+                </div>
+            </div>
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title text-center mt-1 mb-1 fw-bold"><%= camp.name %></h5>
-                <p class="card-text"><%= camp.description %></p>
-                <a href="/campgrounds/<%= camp._id %>" class="btn btn-primary mx-3">More Details</a>
+                <h5 class="card-title"><%= camp.name %></h5>
+                <p class="card-text text-secondary small"><%= camp.description.substring(0, 100) %>...</p>
+                <a href="/campgrounds/<%= camp._id %>" class="btn btn-success mt-auto">View Details</a>
             </div>
         </div>
     </div>
         
         <% } %>
     </div>
-        </div>   
-            
+</div>
