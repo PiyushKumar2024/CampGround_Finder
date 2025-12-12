@@ -15,12 +15,18 @@
                 <li class="nav-item"><a href="/campgrounds/new" class="nav-link">New Camp</a></li>
             </ul>
             <div class="d-flex">
+                <% if(!currentUser){ %>
+                <a href="/register" class="btn btn-success me-2">
+                    <i class="bi bi-person-plus-fill"></i> Register
+                </a>
                 <a href="/login" class="btn btn-outline-dark me-2">
                     <i class="bi bi-box-arrow-in-right"></i> Login
                 </a>
-                <a href="/register" class="btn btn-success">
-                    <i class="bi bi-person-plus-fill"></i> Register
+                <% }else{ %>
+                <a href="/logout" class="btn btn-outline-dark me-2">
+                    <i class="bi bi-person-plus-fill"></i> Logout
                 </a>
+                <% } %>
             </div>
         </div>
     </div>

@@ -24,3 +24,23 @@
     6.passport.authenticate('local',{failureFlash:true,failureRedirect:'/login'})
     used to authenticate via local stratergy and failure falsh:true gives flash enabled for falsh
     and failure redirect redirect when failure occurs 
+
+    7.req.isAuthenticated()
+    check wether the given user is logged in/authenticated or not
+
+    8.req.user()
+    gives the current user
+
+    9. all the passport intialisation should be done before anything
+
+    10.req.logout(callback with err param) 
+    do the rest of the work in this
+
+    11.However, due to some recent security improvements in the Passport.js version updates
+    (used for authentication in our application), the session now gets cleared
+    after a successful login. This causes a problem with our returnTo redirect logic 
+    because we store the returnTo route path (i.e., the path where the user should be redirected back after login)
+    in the session (req.session.returnTo), which gets cleared after a successful login.
+    To resolve this issue, we will use a middleware function to transfer the returnTo value 
+    from the session (req.session.returnTo) to the Express.js app res.locals object before the 
+    passport.authenticate() function is executed in the /login POST route. 
