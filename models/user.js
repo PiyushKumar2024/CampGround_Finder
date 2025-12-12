@@ -1,10 +1,6 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
-const passport=require('passport');
-const passportLocal=require('passport-local');
 const passportLocalMongoose=require('passport-local-mongoose')
-console.log('passportLocalMongoose type:', typeof passportLocalMongoose);
-console.log(passportLocalMongoose);
 
 //Important: unique:true is an index hint
 // not a validation rule. Mongoose won’t perform a synchronous uniqueness check

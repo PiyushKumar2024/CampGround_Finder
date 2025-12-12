@@ -1,3 +1,5 @@
+!!the most commom problem during debugging is the caching of node
+
 1.authentication using passport
     1.passport.use(new LocalStrategy(User.authenticate())); 
 
@@ -9,7 +11,7 @@
 
     how the user will be stored and deleted from a session
 
-    3.User.register(user,pw)
+    3.User.register(user,pw);
     async so use await. set a password hashed to the user obj and we can storein our db
 
     4.app.use(passport.initialize());
@@ -18,3 +20,7 @@
     5.app.use(passport.session());
     enable session login so dont have to re login again and again
     express.session() should be setup first
+
+    6.passport.authenticate('local',{failureFlash:true,failureRedirect:'/login'})
+    used to authenticate via local stratergy and failure falsh:true gives flash enabled for falsh
+    and failure redirect redirect when failure occurs 

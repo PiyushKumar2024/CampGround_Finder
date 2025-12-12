@@ -22,6 +22,11 @@ const campgroundsRoutes=require('./routes/campground.js');
 const reviewsRoutes=require('./routes/reviews.js');
 const authenticationRoutes=require('./routes/user.js');
 
+// Debugging Middleware: Log every request to see if it reaches the server
+app.use((req, res, next) => {
+    console.log(`DEBUG: Incoming Request ${req.method} ${req.url}`);
+    next();
+});
 
 const session=require('express-session');
 const flash=require('connect-flash');
@@ -61,7 +66,9 @@ app.use((req,res,next)=>{
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.use(new LocalStrategy(User.authenticate()));
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
