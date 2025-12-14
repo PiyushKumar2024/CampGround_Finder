@@ -5,15 +5,12 @@ const {storeReturnTo}=require('../middleware.js');
 const { showRegPage, registerUser, showLoginPage, loginUser, logoutUser } = require('../controllers/user.js');
 
 router.route('/register')
-    .get('/register',showRegPage)
-    .post('/register',registerUser)
+    .get(showRegPage)
+    .post(registerUser)
 
 router.route('/login')
-    .get('/login',showLoginPage)
-
-router
-//catching the redirecturl as after successfull login the sesion gets cleared up in newer versions
-router
+    .get(showLoginPage)
+    .post(storeReturnTo,passport.authenticate('local',{failureFlash:true,failureRedirect:'/login'}),loginUser)
 
 router.get('/logout',logoutUser);
 
