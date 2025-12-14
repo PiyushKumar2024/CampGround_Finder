@@ -1,6 +1,7 @@
- const mongoose=require('mongoose')
- const Schema=mongoose.Schema
- const Review=require('./review')
+ const mongoose=require('mongoose');
+ const Schema=mongoose.Schema;
+ const Review=require('./review');
+ const User=require('./user');
 
  const campgrounds=new Schema({
      name:{
@@ -21,6 +22,11 @@
      },
      image:{
          type:String
+     },
+     //author will be singular but there can be many reviews
+     author:{
+        type:Schema.Types.ObjectId,
+        ref:'User'
      },
      reviews:[{
          type:Schema.Types.ObjectId,

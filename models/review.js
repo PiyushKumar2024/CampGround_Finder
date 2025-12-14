@@ -12,7 +12,11 @@ const review = new Schema({
         default:Date.now
     },
     body: { type: String },
-    rating: { type: Number }
+    rating: { type: Number },
+    author:{
+        type:Schema.Types.ObjectId,
+        ref:'User'
+     }
 })
 
 module.exports = mongooose.model('Review', review)

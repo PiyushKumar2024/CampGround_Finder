@@ -20,6 +20,7 @@ const seed = async () => {
     for (let i = 0; i < 100; i++) {
         const random = Math.floor(Math.random()*cities.length)
         const camp = new Campground({
+            author:'693d1a84236fcf82f6fe7706',
             location: `${cities[random].city},${cities[random].state}`,
             price: Math.floor((Math.random()) * 1000 + 200),
             description: 'just a random campgrounds',
